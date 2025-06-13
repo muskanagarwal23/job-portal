@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const { applyToJob,getApplicationsForEmployer,updateApplicationStatus } = require('../controllers/applicationController');

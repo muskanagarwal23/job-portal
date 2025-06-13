@@ -43,7 +43,7 @@ const EmployerRegister = () => {
       const res = await axios.post('http://localhost:5000/api/users/register', {
         name,
         email,
-        companyEmail, // 👈 using companyEmail as the main identifier
+        companyEmail, 
         password,
         role: 'employer',
       });

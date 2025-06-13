@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useLocation, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const CompanyDetails = () => {
   const navigate = useNavigate();
@@ -14,6 +17,14 @@ const CompanyDetails = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    if (!companyName || !company_description) {
+              toast.error("Please fill in all required fields!", {
+                position: "top-right",
+                autoClose: 3000,
+              });
+              return;
+            }
 
     const companyData = {
       companyName,
@@ -52,6 +63,7 @@ const CompanyDetails = () => {
                       placeholder="e.g. Microsoft"
                       value={companyName}
                       onChange={(e) => setCompanyName(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -73,6 +85,7 @@ const CompanyDetails = () => {
                       placeholder="Brief about the company and its vision"
                       value={company_description}
                       onChange={(e) => setCompany_Description(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -97,6 +110,7 @@ const CompanyDetails = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer/>
     </div>
   );
 };

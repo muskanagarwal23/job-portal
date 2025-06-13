@@ -3,6 +3,7 @@ import { Container, Card, Button } from 'react-bootstrap';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { useBookmark } from '../../Context/BookmarkContext';
 import { useSearch } from '../../Context/SearchContext';
+import { toast } from 'react-toastify';
 
 const EmployeeSaved = () => {
   const { bookmarkedJobs, toggleBookmark } = useBookmark();
@@ -14,6 +15,34 @@ const EmployeeSaved = () => {
     job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
     job.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleApply = async (job) => {
+        const jobId = job._id;
+      try {
+        const res = await fetch(`http://localhost:5000/api/applications/apply/${jobId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('token')}` // 👈 Make sure this exists
+          },
+          // body: JSON.stringify({}),
+        });
+    
+        
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error( errorText || 'Failed to apply');
+        }
+    
+        alert('Application submitted!');
+      } catch (err) {
+        const message = err?.message?.includes('<!DOCTYPE') 
+          ? 'Already applied to this job'
+        : err.message;
+        console.error('Apply error:', message);
+        toast.error('Already applied to this job ' + message);
+      }
+    };
 
   return (
     <div
@@ -57,7 +86,11 @@ const EmployeeSaved = () => {
                   <BookmarkIcon fontSize="large" className="text-primary" />
                 </div>
 
-                <Button variant="primary" className="fw-bold px-4 py-2">
+                <Button 
+                variant="primary" 
+                className="fw-bold px-4 py-2"
+                onClick={() =>  handleApply(job) }
+                >
                   Apply
                 </Button>
               </div>

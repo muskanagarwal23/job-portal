@@ -4,7 +4,7 @@ import { Container, Card, Badge, Button } from "react-bootstrap";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { useBookmark } from "../../Context/BookmarkContext";
-
+import { toast } from "react-toastify";
 const JobDetail = () => {
   const { id } = useParams();
   const [job, setJob] = useState(null);
@@ -28,6 +28,34 @@ const JobDetail = () => {
     };
     fetchJob();
   }, [id]);
+
+  const handleApply = async (job) => {
+      const jobId = job._id;
+    try {
+      const res = await fetch(`http://localhost:5000/api/applications/apply/${jobId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}` // 👈 Make sure this exists
+        },
+        // body: JSON.stringify({}),
+      });
+  
+      
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error( errorText || 'Failed to apply');
+      }
+  
+      alert('Application submitted!');
+    } catch (err) {
+      const message = err?.message?.includes('<!DOCTYPE') 
+        ? 'Already applied to this job'
+      : err.message;
+      console.error('Apply error:', message);
+      toast.error('Already applied to this job ' + message);
+    }
+  };
 
   if (loading)
     return <p className="text-center mt-5">Loading job details...</p>;
@@ -111,7 +139,11 @@ const JobDetail = () => {
           <p>{job.company_description}</p>
           <hr />
           <div className="d-flex gap-3 mt-4">
-            <Button variant="primary" className="px-4 ">
+            <Button 
+            variant="primary" 
+            className="px-4 fw-bold py-2 "
+            onClick={() => handleApply(job)}
+            >
               Apply
             </Button>
             <Button

@@ -1,4 +1,3 @@
-// controllers/applicationController.js
 const asyncHandler = require('express-async-handler');
 const Application = require('../models/Application');
 const Job = require('../models/jobmodel');
@@ -36,14 +35,18 @@ console.log("📌 User ID:", req.user?._id);
     throw new Error('Already applied to this job');
   }
 
-  const employee = await User.findById(req.user._id).select('name email phone');
+  const employee = await User.findById(req.user._id).select('name email phone resumeFile');
   if (!employee) {
     res.status(404);
     throw new Error('Employee not found');
   }
   console.log('Resume file path:', req.file?.path); // check multer upload
-
-  const filePath = req.file.path.replace(/\\/g, '/').replace('/^public/\\', '');
+  const resumeFilePath = employee.resumeFile;
+  // const filePath = req.file.path.replace(/\\/g, '/').replace('/^public/\\', '');
+  if (!resumeFilePath) {
+        res.status(400);
+        throw new Error('Please upload your resume in your profile before applying for a job.');
+    }
 
   const newApplication = await Application.create({
     job: jobId,
@@ -52,7 +55,7 @@ console.log("📌 User ID:", req.user?._id);
     employeeName: employee.name,
     employeeEmail: employee.email,
     employeePhone: employee.phone,
-    resumeFile: filePath
+    resumeFile: resumeFilePath
   });
   console.log('New application:', newApplication);
 

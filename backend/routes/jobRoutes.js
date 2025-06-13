@@ -59,6 +59,17 @@ router.post(
   })
 );
 
+router.get(
+  '/employer',
+  protect,
+  authorize('employer'),
+  catchAsync(async (req, res) => {
+    const employerId = req.user._id;
+    const jobs = await Job.find({ employer: employerId }).sort({ createdAt: -1 });
+    res.status(200).json(jobs);
+  })
+);
+
 // GET /api/jobs - get all jobs
 router.get(
   '/',
@@ -80,4 +91,26 @@ router.get(
   })
 );
 
+
+
+router.delete(
+  '/:id',
+  protect,
+  authorize('employer'),
+  catchAsync(async (req, res) => {
+    const job = await Job.findById(req.params.id);
+
+    if (!job) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    if (job.employer.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to delete this job' });
+    }
+
+    await job.deleteOne();
+
+    res.status(200).json({ message: 'Job deleted successfully' });
+  })
+);
 module.exports = router;

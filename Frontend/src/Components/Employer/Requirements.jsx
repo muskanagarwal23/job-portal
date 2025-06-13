@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Requirements = () => {
   const location = useLocation();
@@ -15,6 +17,14 @@ const Requirements = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+     if (!language || !experience) {
+          toast.error("Please fill in all required fields!", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+          return;
+        }
 
     const requireData = {
       
@@ -55,6 +65,7 @@ const Requirements = () => {
                       placeholder="e.g. 2+ years in frontend development"
                       value={experience}
                       onChange={(e) => setExperience(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -76,6 +87,7 @@ const Requirements = () => {
                       placeholder="e.g. English, Hindi, Tamil"
                       value={language}
                       onChange={(e) => setLanguage(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -101,6 +113,7 @@ const Requirements = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer/>
     </div>
   );
 };

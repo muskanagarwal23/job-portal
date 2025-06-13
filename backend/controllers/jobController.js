@@ -1,4 +1,4 @@
-// controllers/jobController.js
+
 const asyncHandler = require('express-async-handler');
 const Job = require('../models/jobmodel');
 
@@ -24,7 +24,30 @@ const getEmployerJobs = asyncHandler(async (req, res) => {
   res.status(200).json(jobs);
 });
 
+// Delete a job (only for employers)
+const deleteJob = asyncHandler(async (req, res) => {
+  const jobId = req.params.id;
+  const employerId = req.user._id;
+
+  const job = await Job.findById(jobId);
+
+  if (!job) {
+    return res.status(404).json({ message: "Job not found" });
+  }
+
+  // Check if this job was posted by the logged-in employer
+  if (job.employer.toString() !== employerId.toString()) {
+    return res.status(403).json({ message: "Not authorized to delete this job" });
+  }
+
+  await job.deleteOne(); // or job.remove();
+
+  res.status(200).json({ message: "Job deleted successfully" });
+});
+
+
 module.exports = {
   createJob,
   getEmployerJobs,
+  deleteJob
 };

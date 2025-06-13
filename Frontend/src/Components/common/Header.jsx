@@ -41,7 +41,7 @@ const Header = () => {
   };
 
   return (
-    <Navbar expand="lg" className="shadow-sm py-3" style={{ backgroundColor: '#f5f5f5' }}>
+    <Navbar expand="lg" className="shadow-sm py-0" style={{ backgroundColor: '#f5f5f5' }}>
       <Container fluid>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img src={Logo} alt="logo" width="120" className="me-2" height="100" />
@@ -64,6 +64,9 @@ const Header = () => {
               <Nav.Link as={Link} to="/received" className="text-primary fw-bold">
                 view Resumes
               </Nav.Link>
+              <Nav.Link as={Link} to="/my-posts" className="text-primary fw-bold">
+                view Jobs
+              </Nav.Link>
               <Nav.Link onClick={handleLogout} className="text-danger fw-bold" style={{ cursor: 'pointer' }}>
                 Logout
               </Nav.Link>
@@ -72,7 +75,7 @@ const Header = () => {
 
           {isReceived && (
             <Nav className="ms-auto d-flex gap-3">
-              <Nav.Link as={Link} to="/job-data" className="text-primary fw-bold">
+              <Nav.Link as={Link} to="/job-data" className="text-primary fw-bold" style={{ cursor: 'pointer' }}>
                 Post Jobs
               </Nav.Link>
               <Nav.Link onClick={handleLogout} className="text-danger fw-bold" style={{ cursor: 'pointer' }}>
@@ -83,7 +86,7 @@ const Header = () => {
 
           {isEmployerAuth && (
             <Nav className="ms-auto d-flex gap-3">
-              <Nav.Link as={Link} to="/register" className="text-primary fw-bold">
+              <Nav.Link as={Link} to="/register" className="text-primary fw-bold" style={{ cursor: 'pointer' }}>
                 Employee Login?
               </Nav.Link>
               
@@ -93,7 +96,7 @@ const Header = () => {
          
           {isEmployeeAuth && (
             <Nav className="ms-auto d-flex gap-3">
-              <Nav.Link as={Link} to="/login" className="text-primary fw-bold">
+              <Nav.Link as={Link} to="/login" className="text-primary fw-bold" style={{ cursor: 'pointer' }}>
                 Employer Login?
               </Nav.Link>
             </Nav>
@@ -113,7 +116,7 @@ const Header = () => {
                   onChange={e => setSearchQuery(e.target.value)}
                 />
                 <Button
-                  variant="outline-success"
+                  variant="outline-primary"
                   className="rounded-pill px-2"
                   style={{ height: '40px' }}
                   onClick={e => e.preventDefault()}
@@ -129,11 +132,11 @@ const Header = () => {
                 </Nav.Link>
                 
                 <Nav.Link as={Link} to="/employee-profile" className="text-dark">
-                  <PersonIcon fontSize="large" />
+                  <PersonIcon fontSize="large" style={{ cursor: 'pointer' }}/>
                 </Nav.Link>
                 
                 <Nav.Link as={Link} to="/employee-saved" className="text-dark">
-                  <BookmarkSharpIcon fontSize="large" />
+                  <BookmarkSharpIcon fontSize="large" style={{ cursor: 'pointer' }}/>
                 </Nav.Link>
                 <Nav.Link onClick={handleLogout} className="text-danger fw-bold" style={{ cursor: 'pointer' }}>
                   Logout
@@ -212,7 +215,7 @@ const Header = () => {
                 </Nav.Link>
                 
                 <Nav.Link as={Link} to="/employee-saved" className="text-dark">
-                  <BookmarkSharpIcon fontSize="large" />
+                  <BookmarkSharpIcon fontSize="large" style={{ cursor: 'pointer' }}/>
                 </Nav.Link>
                 <Nav.Link onClick={handleLogout} className="text-danger fw-bold" style={{ cursor: 'pointer' }}>
                   Logout
@@ -225,11 +228,11 @@ const Header = () => {
           
           {isEmployeeProfile && (
             <Nav className="ms-auto d-flex align-items-center gap-4">
-              <Nav.Link as={Link} to="/employee-applied" className="text-dark">
-                  MyJobs
+              <Nav.Link as={Link} to="/employee-applied" className="text-primary fw-bold" style={{ cursor: 'pointer' }}>
+                  My Jobs
                 </Nav.Link>
               <Nav.Link as={Link} to="/employee-saved" className="text-dark">
-                <BookmarkSharpIcon fontSize="large" />
+                <BookmarkSharpIcon fontSize="large" style={{ cursor: 'pointer' }}/>
               </Nav.Link>
               <Nav.Link onClick={handleLogout} className="text-danger fw-bold" style={{ cursor: 'pointer' }}>
                 Logout

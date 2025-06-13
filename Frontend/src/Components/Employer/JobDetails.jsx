@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const JobDetails = () => {
   const [category, setCategory] = useState("");
@@ -16,7 +18,17 @@ const JobDetails = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
+    
     event.preventDefault();
+    
+    if (!title || !description || !salary || !jobType || !location || !skills || !education) {
+      toast.error("Please fill in all required fields!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+    
     const jobData = {
       category,
       title,
@@ -72,6 +84,7 @@ const JobDetails = () => {
                       placeholder="e.g. Frontend Developer"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -83,6 +96,7 @@ const JobDetails = () => {
                       placeholder="Brief job description"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -93,6 +107,7 @@ const JobDetails = () => {
                       placeholder="e.g. ₹50,000/month"
                       value={salary}
                       onChange={(e) => setSalary(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -101,6 +116,7 @@ const JobDetails = () => {
                     <Form.Select
                       value={jobType}
                       onChange={(e) => setJobType(e.target.value)}
+                      
                     >
                       <option value="">Select job type</option>
                       <option value="Full-time">Full-time</option>
@@ -119,6 +135,7 @@ const JobDetails = () => {
                       placeholder="e.g. Mumbai, Remote"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -136,25 +153,27 @@ const JobDetails = () => {
 
                   <Form.Group className="mb-3" controlId="formSkills">
                     <Form.Label className="fw-semibold">
-                      Skills (comma separated)
+                      Skills 
                     </Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="e.g. JavaScript, React, Node.js"
                       value={skills}
                       onChange={(e) => setSkills(e.target.value)}
+                      
                     />
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formEducation">
                     <Form.Label className="fw-semibold">
-                      Education (comma separated)
+                      Education 
                     </Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="e.g. B.Tech, M.Sc Computer Science"
                       value={education}
                       onChange={(e) => setEducation(e.target.value)}
+                      
                     />
                   </Form.Group>
 
@@ -174,6 +193,7 @@ const JobDetails = () => {
           </Col>
         </Row>
       </Container>
+    <ToastContainer />
     </div>
   );
 };

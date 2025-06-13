@@ -27,6 +27,7 @@ import ReviewJob from './Components/Employer/ReviewJob';
 import SuccessPost from './Components/Employer/SuccessPost';
 import JobDetail from './Components/Employee/EmployeeJobDetail';
 import Received from './Components/Employer/Received';
+import MyPosts from './Components/Employer/MyPosts';
 
 const App = () => {
   return (
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="/review" element={<ReviewJob />} />
           <Route path="/success" element={<SuccessPost />} />
           <Route path="/received" element={<Received />} />
+          <Route path="/my-posts" element={<MyPosts />} />
           
 
         </Route>
