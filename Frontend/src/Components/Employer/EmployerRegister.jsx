@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Row,
@@ -7,21 +7,21 @@ import {
   Form,
   Button,
   InputGroup,
-} from 'react-bootstrap';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+} from "react-bootstrap";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const EmployerRegister = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [companyEmail, setCompanyEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyEmail, setCompanyEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
@@ -35,43 +35,43 @@ const EmployerRegister = () => {
 
     if (name.trim().length < 3) {
       toast.dismiss();
-      return toast.error('Name must be at least 3 characters long');
+      return toast.error("Name must be at least 3 characters long");
     }
 
     if (!emailRegex.test(email)) {
       toast.dismiss();
-      return toast.error('Invalid personal email format');
+      return toast.error("Invalid personal email format");
     }
 
     if (!emailRegex.test(companyEmail)) {
       toast.dismiss();
-      return toast.error('Invalid company email format');
+      return toast.error("Invalid company email format");
     }
 
     if (password.length < 6) {
       toast.dismiss();
-      return toast.error('Password must be at least 6 characters');
+      return toast.error("Password must be at least 6 characters");
     }
 
     try {
-      const res = await axios.post('http://localhost:5000/api/users/register', {
+      const res = await axios.post("http://localhost:5000/api/users/register", {
         name,
         email,
         companyEmail,
         password,
-        role: 'employer',
+        role: "employer",
       });
 
       const { user, token } = res.data;
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
       toast.dismiss();
-      toast.success('Registered successfully');
-      navigate('/dashboard');
+      toast.success("Registered successfully");
+      navigate("/dashboard");
     } catch (err) {
       toast.dismiss();
-      toast.error(err.response?.data?.message || 'Registration failed');
+      toast.error(err.response?.data?.message || "Registration failed");
     }
   };
 
@@ -87,7 +87,7 @@ const EmployerRegister = () => {
             <Card
               className="shadow-lg border-0 rounded-4"
               data-aos="fade-up"
-              style={{ background: '#ffffff', backdropFilter: 'blur(5px)' }}
+              style={{ background: "#ffffff", backdropFilter: "blur(5px)" }}
             >
               <Card.Body className="p-5">
                 <h2 className="text-center mb-4 fw-bold text-primary">
@@ -108,7 +108,9 @@ const EmployerRegister = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-semibold">Personal Email</Form.Label>
+                    <Form.Label className="fw-semibold">
+                      Personal Email
+                    </Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="e.g. john@gmail.com"
@@ -120,7 +122,9 @@ const EmployerRegister = () => {
                   </Form.Group>
 
                   <Form.Group className="mb-3">
-                    <Form.Label className="fw-semibold">Company Email</Form.Label>
+                    <Form.Label className="fw-semibold">
+                      Company Email
+                    </Form.Label>
                     <Form.Control
                       type="email"
                       placeholder="e.g. hr@company.com"
@@ -135,7 +139,7 @@ const EmployerRegister = () => {
                     <Form.Label className="fw-semibold">Password</Form.Label>
                     <InputGroup>
                       <Form.Control
-                        type={showPassword ? 'text' : 'password'}
+                        type={showPassword ? "text" : "password"}
                         placeholder="Minimum 6 characters"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -164,13 +168,13 @@ const EmployerRegister = () => {
                   </div>
 
                   <p className="text-center mb-1">
-                    Already have an account?{' '}
+                    Already have an account?{" "}
                     <Link to="/login" className="text-decoration-none">
                       Login
                     </Link>
                   </p>
                   <p className="text-center">
-                    Not an employer?{' '}
+                    Not an employer?{" "}
                     <Link to="/employee-login" className="text-decoration-none">
                       Employee Login
                     </Link>

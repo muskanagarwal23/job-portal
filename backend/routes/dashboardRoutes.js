@@ -1,8 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {getDashboard} = require('../controllers/employerController');
-const {protect , authorize} = require('../middleware/authMiddleware');
+const {
+  getDashboard,
+  getEmployerInfo,
+} = require("../controllers/employerController");
+const { protect, authorize } = require("../middleware/authMiddleware");
 
-router.get('/dashboard' , protect ,authorize('employer'), getDashboard);
+router.get("/dashboard", protect, authorize("employer"), getDashboard);
 
 module.exports = router;

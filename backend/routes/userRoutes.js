@@ -1,14 +1,18 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { registerUser, 
+const {
+  registerUser,
   loginUser,
-  forgotPassword, 
-  resetPassword } = require('../controllers/userController');
+  forgotPassword,
+  resetPassword,
+} = require("../controllers/userController");
 
-const {protect, authorize} = require('../middleware/authMiddleware');
-const { getProfile,
-      updateProfile,
-      uploadProfileImage } = require('../controllers/profileController');
+const { protect, authorize } = require("../middleware/authMiddleware");
+const {
+  getProfile,
+  updateProfile,
+  uploadProfileImage,
+} = require("../controllers/profileController");
 
 // console.log({
 //   getProfile,
@@ -16,20 +20,18 @@ const { getProfile,
 //   uploadProfileImage
 // });
 
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+router.post("/forgot-password", forgotPassword);
+router.post("/reset-password/:token", resetPassword);
 
-
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-router.post('/forgot-password', forgotPassword);
-router.post('/reset-password/:token', resetPassword);
-
-router.route('/profile')
-  .get(protect, authorize('employee'), getProfile)
-  .put(protect, authorize('employee'), uploadProfileImage, updateProfile);
+router
+  .route("/profile")
+  .get(protect, authorize("employee"), getProfile)
+  .put(protect, authorize("employee"), uploadProfileImage, updateProfile);
 //console.log({ getProfile, updateProfile, uploadProfileImage });
 
-router.get('/job-data' , protect , authorize('employer'),
-(req, res) => {
-  res.json({message:'Employer access only'})
-})
-module.exports = router; 
+router.get("/job-data", protect, authorize("employer"), (req, res) => {
+  res.json({ message: "Employer access only" });
+});
+module.exports = router;

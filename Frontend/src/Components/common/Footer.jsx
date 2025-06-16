@@ -1,16 +1,21 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="py-4 mt-auto" style={{ borderTop: '1px solid #dee2e6', backgroundColor: '#f9f9f9' }}>
+    <footer
+      className="py-4 mt-auto"
+      style={{ borderTop: "1px solid #dee2e6", backgroundColor: "#f9f9f9" }}
+    >
       <Container>
         <Row className="gy-4 text-center text-md-start">
           {/* Brand / Logo */}
           <Col md={4}>
             <h4 className="fw-bold text-primary mb-2">Career Connect</h4>
-            <p className="text-muted mb-0">Connecting talent with opportunity.</p>
+            <p className="text-muted mb-0">
+              Connecting talent with opportunity.
+            </p>
           </Col>
 
           {/* Quick Links */}
@@ -18,16 +23,36 @@ const Footer = () => {
             <h6 className="text-uppercase text-dark mb-3">Quick Links</h6>
             <ul className="list-unstyled">
               <li className="mb-2">
-                <Link to="/" className="text-decoration-none text-muted hover-link">Home</Link>
+                <Link
+                  to="/"
+                  className="text-decoration-none text-muted hover-link"
+                >
+                  Home
+                </Link>
               </li>
               <li className="mb-2">
-                <Link to="/jobs" className="text-decoration-none text-muted hover-link">Browse Jobs</Link>
+                <Link
+                  to="/jobs"
+                  className="text-decoration-none text-muted hover-link"
+                >
+                  Browse Jobs
+                </Link>
               </li>
               <li className="mb-2">
-                <Link to="/employee-profile" className="text-decoration-none text-muted hover-link">My Profile</Link>
+                <Link
+                  to="/employee-profile"
+                  className="text-decoration-none text-muted hover-link"
+                >
+                  My Profile
+                </Link>
               </li>
               <li className="mb-2">
-                <Link to="/employee-saved" className="text-decoration-none text-muted hover-link">Saved Jobs</Link>
+                <Link
+                  to="/employee-saved"
+                  className="text-decoration-none text-muted hover-link"
+                >
+                  Saved Jobs
+                </Link>
               </li>
             </ul>
           </Col>
@@ -45,7 +70,8 @@ const Footer = () => {
         <Row>
           <Col className="text-center">
             <small className="text-muted">
-              &copy; {new Date().getFullYear()} Career Connect. All rights reserved.
+              &copy; {new Date().getFullYear()} Career Connect. All rights
+              reserved.
             </small>
           </Col>
         </Row>

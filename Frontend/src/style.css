@@ -4,59 +4,47 @@ body{
   background-color: #f8f9fa;
 }
 
-
-
-/*
-  Custom CSS for the gradient border effect.
-  This approach uses a technique where the parent element has the gradient background
-  and padding, and the child element has a solid background, creating the border appearance.
-*/
-
 .image-gradient-border-wrapper {
-  /* This div creates the gradient background that will act as the border */
-  border-radius: 50%; /* Makes it circular based on width/height, or oval if they differ */
-  padding: 3px; /* This padding creates the space for the "border" thickness */
-  /* The exact gradient colors from the original image (blue to purple) */
+  
+  border-radius: 50%; 
+  padding: 3px; 
+  
   background-image: linear-gradient(
     to bottom right,
-    #8ec5fc 0%, /* A light blue */
-    #e0c3fc 100% /* A light purple */
+    #8ec5fc 0%,
+    #e0c3fc 100% 
   );
-  display: flex; /* Use flexbox to center the inner content */
+  display: flex; 
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
-  transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); 
+  transition: all 0.3s ease-in-out; 
 }
 
-/* Optional: hover effect for the wrapper */
+
 .image-gradient-border-wrapper:hover {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px); /* Slight lift on hover */
+  transform: translateY(-2px); 
 }
 
 .image-gradient-border-inner {
-  /* This inner div creates the white background for the image itself */
-  border-radius: 50%; /* Makes it circular based on width/height, or oval if they differ */
-  background-color: white; /* Solid white background inside the gradient border */
-  /* Ensure the inner div takes up most of the space inside the wrapper,
-     leaving the padding of the wrapper visible as a border. */
+  
+  border-radius: 50%; 
+  background-color: white; 
+  
   width: 100%;
   height: 100%;
-  display: flex; /* Use flexbox to center the image */
+  display: flex; 
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Important: Hides any parts of the image that might exceed the circle */
-  /* Optional: small inner padding so the image doesn't touch the white edge */
+  overflow: hidden; 
   padding: 5px;
 }
 
-/* Style for the image inside the border */
 .image-gradient-border-inner img {
-  border-radius: 50%; /* Ensures the image itself is circular/oval based on parent */
-  object-fit: cover; /* Covers the area, cropping if necessary (important for various image aspect ratios) */
-  width: 100%; /* Make image fill its parent container */
-  height: 100%; /* Make image fill its parent container */
-  /* Optional: a very subtle inner white border if desired, similar to original screenshot */
+  border-radius: 50%; 
+  object-fit: cover; 
+  width: 100%; 
+  height: 100%; 
   border: 1px solid rgba(255, 255, 255, 0.3);
 }

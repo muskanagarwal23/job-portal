@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Form, FormControl, Button } from 'react-bootstrap';
-import SearchSharpIcon from '@mui/icons-material/SearchSharp';
+import React, { useState } from "react";
+import { Form, FormControl, Button } from "react-bootstrap";
+import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 
 const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -26,12 +26,17 @@ const SearchBar = ({ onSearch }) => {
         type="search"
         placeholder="Search"
         className="me-2 rounded-pill px-3 py-2 fs-5"
-        style={{ height: '50px' }}
+        style={{ height: "50px" }}
         aria-label="Search"
         value={query}
         onChange={handleChange}
       />
-      <Button variant="outline-success" type="submit" className="rounded-pill px-2" style={{ height: '40px' }}>
+      <Button
+        variant="outline-success"
+        type="submit"
+        className="rounded-pill px-2"
+        style={{ height: "40px" }}
+      >
         <SearchSharpIcon />
       </Button>
     </Form>

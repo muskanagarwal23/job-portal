@@ -1,21 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { applyToJob,getApplicationsForEmployer,updateApplicationStatus } = require('../controllers/applicationController');
-const { protect,authorize } = require('../middleware/authMiddleware');
-const { getMyApplications } = require('../controllers/applicationController');
-const ExpressError = require('../utils/ExpressError')
+const {
+  applyToJob,
+  getApplicationsForEmployer,
+  updateApplicationStatus,
+} = require("../controllers/applicationController");
+const { protect, authorize } = require("../middleware/authMiddleware");
+const { getMyApplications } = require("../controllers/applicationController");
 
-router.post('/apply/:jobId', protect, applyToJob);
+router.post("/apply/:jobId", protect, applyToJob);
 router.get(
-  '/employer',
+  "/employer",
   protect,
-  authorize('employer'),
+  authorize("employer"),
   getApplicationsForEmployer
 );
-router.put('/status/:id', protect, updateApplicationStatus);
-router.get('/test', (req, res) => {
-  res.json({ message: 'Application routes working' });
+router.put("/status/:id", protect, updateApplicationStatus);
+router.get("/test", (req, res) => {
+  res.json({ message: "Application routes working" });
 });
-router.get('/my', protect, authorize('employee'), getMyApplications);
+router.get("/my", protect, authorize("employee"), getMyApplications);
 
 module.exports = router;

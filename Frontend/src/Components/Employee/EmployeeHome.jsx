@@ -33,33 +33,40 @@ const EmployeeHome = () => {
 
   const handleApply = async (job) => {
     const jobId = job._id;
-  try {
-    const res = await fetch(`http://localhost:5000/api/applications/apply/${jobId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}` // 👈 Make sure this exists
-      },
-      // body: JSON.stringify({}),
-    });
+    try {
+      const res = await fetch(
+        `http://localhost:5000/api/applications/apply/${jobId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // 👈 Make sure this exists
+          },
+          // body: JSON.stringify({}),
+        }
+      );
 
-    
-    if (!res.ok) {
-      const errorText = await res.text();
-      throw new Error( errorText || 'Failed to apply');
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Failed to apply");
+      }
+
+      alert("Application submitted!");
+    } catch (err) {
+      const message = err?.message?.includes("<!DOCTYPE")
+        ? "Already applied to this job"
+        : err.message;
+      console.error("Apply error:", message);
+      toast.dismiss();
+      if (message.includes("Update profile")) {
+        toast.error("Update your profile first before applying");
+      } else if (message.includes("Already applied")) {
+        toast.error("You have already applied to this job");
+      } else {
+        toast.error("Could not apply to job: " + message);
+      }
     }
-
-    alert('Application submitted!');
-  } catch (err) {
-    const message = err?.message?.includes('<!DOCTYPE') 
-      ? 'Already applied to this job'
-    : err.message;
-    console.error('Apply error:', message);
-    toast.dismiss();
-    toast.error('Could not apply to job: ' + message);
-  }
-};
-
+  };
 
   const isBookmarked = (job) =>
     bookmarkedJobs.some((item) => item._id === job._id);

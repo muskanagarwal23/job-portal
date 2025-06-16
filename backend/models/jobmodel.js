@@ -18,10 +18,9 @@ const jobSchema = new mongoose.Schema({
   company_description: String,
   Url: String,
   employer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  postedBy: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'User',
-  required: true
+  views: {
+  type: Number,
+  default: 0,
 }
 }, { timestamps: true });
 

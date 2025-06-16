@@ -1,5 +1,5 @@
 
-import React from "react";
+import {React,useState} from "react";
 import { Container, ListGroup, Row, Col, Card, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -7,9 +7,12 @@ const ReviewJob = () => {
   const location = useLocation();
   const data = location.state || {};
   const navigate = useNavigate();
-
-  const handleClick = async () => {
-  try {
+   const [loading, setLoading] = useState(false);
+  
+   const handleClick = async () => {
+   if (loading) return;
+   setLoading(true);
+    try {
     const token = localStorage.getItem('token');
     console.log('📦 Token:', token);
 
@@ -22,7 +25,7 @@ const ReviewJob = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`, // 🔐 Add token here
+        'Authorization': `Bearer ${token}`, 
       },
       body: JSON.stringify(data),
     });
@@ -38,6 +41,7 @@ const ReviewJob = () => {
     
     console.error('Error posting job:',error);
     alert('There was an error posting the job. Please try again.');
+    setLoading(false);
   }
 };
 
@@ -99,8 +103,9 @@ const ReviewJob = () => {
                 size="lg"
                 className="rounded-pill px-5"
                 onClick={handleClick}
-              >
-                Post Job
+                disabled={loading} 
+                >
+                {loading ? "Posting..." : "Post Job"}
               </Button>
             </div>
           </Col>

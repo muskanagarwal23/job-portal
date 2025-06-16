@@ -89,8 +89,10 @@ const EmployeeProfile = () => {
       formDataToSend.append("email", formData.email);
       formDataToSend.append("phone", formData.phone);
 
-      if (profileImage instanceof File) formDataToSend.append("profileImage", profileImage);
-      if (resumeFile instanceof File) formDataToSend.append("resumeFile", resumeFile);
+      if (profileImage instanceof File)
+        formDataToSend.append("profileImage", profileImage);
+      if (resumeFile instanceof File)
+        formDataToSend.append("resumeFile", resumeFile);
 
       await axios.put("/api/users/profile", formDataToSend, {
         headers: {
@@ -135,7 +137,11 @@ const EmployeeProfile = () => {
         >
           <div
             className="position-relative mx-auto mb-4"
-            style={{ width: 160, height: 160, cursor: !isSaved ? "pointer" : "default" }}
+            style={{
+              width: 160,
+              height: 160,
+              cursor: !isSaved ? "pointer" : "default",
+            }}
             title={!isSaved ? "Click to change profile picture" : ""}
           >
             <img
@@ -186,7 +192,10 @@ const EmployeeProfile = () => {
                   onChange={handleChange}
                   placeholder="Your Name"
                   className="form-control form-control-lg text-center"
-                  style={{ borderRadius: 30, boxShadow: "inset 0 2px 6px #e1e5ea" }}
+                  style={{
+                    borderRadius: 30,
+                    boxShadow: "inset 0 2px 6px #e1e5ea",
+                  }}
                 />
               )}
             </Col>
@@ -204,7 +213,10 @@ const EmployeeProfile = () => {
                   onChange={handleChange}
                   placeholder="Your Email"
                   className="form-control form-control-lg text-center"
-                  style={{ borderRadius: 30, boxShadow: "inset 0 2px 6px #e1e5ea" }}
+                  style={{
+                    borderRadius: 30,
+                    boxShadow: "inset 0 2px 6px #e1e5ea",
+                  }}
                 />
               )}
             </Col>
@@ -222,7 +234,10 @@ const EmployeeProfile = () => {
                   onChange={handleChange}
                   placeholder="Phone Number"
                   className="form-control form-control-lg text-center"
-                  style={{ borderRadius: 30, boxShadow: "inset 0 2px 6px #e1e5ea" }}
+                  style={{
+                    borderRadius: 30,
+                    boxShadow: "inset 0 2px 6px #e1e5ea",
+                  }}
                 />
               )}
             </Col>
@@ -248,12 +263,18 @@ const EmployeeProfile = () => {
                   style={{ display: "none" }}
                 />
                 {resumeFile instanceof File && (
-                  <p className="mt-2 text-muted small text-truncate" style={{ maxWidth: 220 }}>
+                  <p
+                    className="mt-2 text-muted small text-truncate"
+                    style={{ maxWidth: 220 }}
+                  >
                     Selected: {resumeFile.name}
                   </p>
                 )}
                 {resumeFile && typeof resumeFile === "string" && (
-                  <p className="mt-2 text-muted small text-truncate" style={{ maxWidth: 220 }}>
+                  <p
+                    className="mt-2 text-muted small text-truncate"
+                    style={{ maxWidth: 220 }}
+                  >
                     Uploaded: {resumeFile.split("/").pop()}
                   </p>
                 )}
@@ -266,7 +287,12 @@ const EmployeeProfile = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline-success mx-auto d-inline-flex align-items-center"
-                  style={{ borderRadius: 30, gap: "0.3rem", width: 140, justifyContent: "center" }}
+                  style={{
+                    borderRadius: 30,
+                    gap: "0.3rem",
+                    width: 140,
+                    justifyContent: "center",
+                  }}
                 >
                   View Resume
                 </a>

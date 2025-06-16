@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
-import employee from '../assets/employee.png';
-import employer from '../assets/employer.png';
-import { useNavigate } from 'react-router-dom';
-import home_img from '../assets/home_img.png';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
+import React, { useEffect, useState } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import employee from "../assets/employee.png";
+import employer from "../assets/employer.png";
+import { useNavigate } from "react-router-dom";
+import home_img from "../assets/home_img.png";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,17 +16,16 @@ const LandingPage = () => {
   useEffect(() => {
     AOS.init({ duration: 1000 });
 
-    
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
 
   const handleEmployerClick = () => {
-    navigate('/login');
+    navigate("/login");
   };
 
   const handleEmployeeClick = () => {
-    navigate('/employee-login');
+    navigate("/employee-login");
   };
 
   return (
@@ -34,8 +33,8 @@ const LandingPage = () => {
       className="bg-light d-flex flex-column min-vh-100 position-relative overflow-hidden"
       style={{
         backgroundImage: `radial-gradient(circle at center, #e9f0ff 10px, #f8fbff 20px)`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '40px 40px',
+        backgroundRepeat: "repeat",
+        backgroundSize: "40px 40px",
       }}
     >
       <Container className="flex-grow-1 py-5 position-relative z-1">
@@ -78,16 +77,28 @@ const LandingPage = () => {
             )}
           </Col>
 
-          <Col md={6} className="text-center position-relative d-flex justify-content-center">
+          <Col
+            md={6}
+            className="text-center position-relative d-flex justify-content-center"
+          >
             {loading ? (
               <Skeleton height={280} width={200} />
             ) : (
               <div
                 className="image-gradient-border-wrapper"
-                style={{ width: '200px', height: '290px', position: 'relative', zIndex: 1 }}
+                style={{
+                  width: "200px",
+                  height: "290px",
+                  position: "relative",
+                  zIndex: 1,
+                }}
               >
                 <div className="image-gradient-border-inner">
-                  <img src={home_img} alt="Landing" className="img-fluid shadow " />
+                  <img
+                    src={home_img}
+                    alt="Landing"
+                    className="img-fluid shadow "
+                  />
                 </div>
               </div>
             )}
@@ -96,16 +107,29 @@ const LandingPage = () => {
 
         <Row className="mt-5 justify-content-center gx-5">
           {[1, 2].map((item, index) => (
-            <Col md={4} lg={3} className="mb-4" data-aos="fade-up" data-aos-delay={index * 100} key={index}>
+            <Col
+              md={4}
+              lg={3}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+              key={index}
+            >
               {loading ? (
-                <Card className="mt-5 p-4 shadow border-0" style={{ minHeight: '320px' }}>
+                <Card
+                  className="mt-5 p-4 shadow border-0"
+                  style={{ minHeight: "320px" }}
+                >
                   <Skeleton height={120} width="60%" className="mx-auto mb-3" />
                   <Skeleton height={25} width="70%" className="mx-auto mb-2" />
                   <Skeleton height={20} width="60%" className="mx-auto mb-3" />
                   <Skeleton height={35} width="50%" className="mx-auto" />
                 </Card>
               ) : (
-                <Card className="mt-5 text-center shadow border-0 hover-shadow" style={{ minHeight: '320px' }}>
+                <Card
+                  className="mt-5 text-center shadow border-0 hover-shadow"
+                  style={{ minHeight: "320px" }}
+                >
                   <Card.Body className="p-4">
                     <Card.Img
                       variant="top"
@@ -113,17 +137,19 @@ const LandingPage = () => {
                       className="mb-3 w-50 mx-auto d-block"
                     />
                     <Card.Title className="h5 fw-semibold">
-                      {index === 0 ? 'Employer' : 'Employee'}
+                      {index === 0 ? "Employer" : "Employee"}
                     </Card.Title>
                     <Card.Text className="text-muted fst-italic mb-3">
-                      {index === 0 ? 'I want to hire' : 'Find Your Dream Job'}
+                      {index === 0 ? "I want to hire" : "Find Your Dream Job"}
                     </Card.Text>
                     <Button
                       variant="primary"
                       className="w-75 rounded-pill"
-                      onClick={index === 0 ? handleEmployerClick : handleEmployeeClick}
+                      onClick={
+                        index === 0 ? handleEmployerClick : handleEmployeeClick
+                      }
                     >
-                      {index === 0 ? 'Post Job' : 'Search Jobs'}
+                      {index === 0 ? "Post Job" : "Search Jobs"}
                     </Button>
                   </Card.Body>
                 </Card>
@@ -133,14 +159,13 @@ const LandingPage = () => {
         </Row>
       </Container>
 
-      
       <svg
         viewBox="0 0 1440 320"
         style={{
-          position: 'absolute',
+          position: "absolute",
           bottom: 0,
           left: 0,
-          width: '100%',
+          width: "100%",
           zIndex: 0,
           opacity: 0.1,
         }}

@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/Logo.png";
 import {
   Navbar,
   Container,
@@ -38,6 +37,7 @@ const Header = () => {
   const isEmployeeApplied = ["/employee-applied"].includes(path);
   const isEmployeeProfile = path === "/employee-profile";
   const isEmployeeAuth = ["/employee-login", "/register"].includes(path);
+  const isEmployerDash = ["/dashboard"].includes(path);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -118,6 +118,13 @@ const Header = () => {
                 <>
                   <Nav.Link
                     as={Link}
+                    to="/dashboard"
+                    className="text-primary fw-semibold"
+                  >
+                    Dashboard
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
                     to="/received"
                     className="text-primary fw-semibold"
                   >
@@ -134,6 +141,13 @@ const Header = () => {
               )}
               {isReceived && (
                 <>
+                  <Nav.Link
+                    as={Link}
+                    to="/dashboard"
+                    className="text-primary fw-semibold"
+                  >
+                    Dashboard
+                  </Nav.Link>
                   <Nav.Link
                     as={Link}
                     to="/job-data"
@@ -154,6 +168,13 @@ const Header = () => {
                 <>
                   <Nav.Link
                     as={Link}
+                    to="/dashboard"
+                    className="text-primary fw-semibold"
+                  >
+                    Dashboard
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
                     to="/job-data"
                     className="text-primary fw-semibold"
                   >
@@ -168,6 +189,17 @@ const Header = () => {
                   </Nav.Link>
                 </>
               )}
+              <Nav.Link
+                onClick={handleLogout}
+                className="text-danger fw-semibold"
+                style={{ cursor: "pointer" }}
+              >
+                Logout
+              </Nav.Link>
+            </Nav>
+          )}
+          {isEmployerDash && (
+            <Nav className="ms-auto d-flex gap-3 align-items-center">
               <Nav.Link
                 onClick={handleLogout}
                 className="text-danger fw-semibold"

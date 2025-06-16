@@ -1,12 +1,76 @@
-# React + Vite
+# CareerConnect – Job Portal 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A role-based job portal where employees can apply for jobs and employers can post and manage job listings.
 
-Currently, two official plugins are available:
+## 📂 Folder Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+Frontend/       # React frontend
+backend/       # Express backend
+```
 
-## Expanding the ESLint configuration
+##  Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+###  Employee
+- View job listings
+- View Job details
+- Apply to jobs
+- Bookmark jobs
+- Track application statuses
+
+###  Employer
+- Dashboard 
+- Post jobs
+- View received applications
+- Update application status (Viewed, Interviewed, Selected, Rejected)
+- Deleted Posted Jobs
+
+You can register both Employer and Employee with Email and Password
+
+## 🛠 Tech Stack
+
+- **Frontend**: React, React Router, Bootstrap
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Authentication**: JWT (role-based)
+- **Others**: Toastify, Multer, Nodemailer,AOS,Skelton
+
+## Backend Setup:
+```
+cd backend
+npm install
+npm start
+npm run dev
+```
+
+
+
+### 🔐 Environment Variables
+```
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+
+### Start the backend server
+
+```bash
+nodemon server.js
+# or
+node server.js
+```
+
+The backend will now be running at: `http://localhost:5000`
+
+## Frontend Setup
+```
+cd Frontend
+npm install
+npm start
+npm run dev
+```
+
+The frontend will now be running at: `http://localhost:5173`
+
+
+

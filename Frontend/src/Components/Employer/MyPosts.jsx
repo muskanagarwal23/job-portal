@@ -90,10 +90,10 @@ const MyPosts = () => {
                       {job.title}
                     </Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">
-                      {job.category}
+                      {job.companyName}
                     </Card.Subtitle>
                     <Card.Text className="text-secondary small">
-                      {job.description?.substring(0, 100)}...
+                      {job.location}
                     </Card.Text>
                     <div className="d-flex justify-content-end">
                       <Button

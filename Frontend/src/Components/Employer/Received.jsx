@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Button, Alert, Spinner, Card } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Alert,
+  Spinner,
+  Card,
+} from "react-bootstrap";
 
 const statusOptions = ["viewed", "interviewed", "selected", "rejected"];
 
@@ -12,22 +20,24 @@ const Received = () => {
   const token = localStorage.getItem("token");
 
   const getRejectedIds = () => {
-  try {
-    const stored = localStorage.getItem("rejectedApplicationIds");
-    return stored ? JSON.parse(stored) : [];
-  } catch {
-    return [];
-  }
-};
+    try {
+      const stored = localStorage.getItem("rejectedApplicationIds");
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  };
 
-const addRejectedId = (id) => {
-  const rejectedIds = getRejectedIds();
-  if (!rejectedIds.includes(id)) {
-    rejectedIds.push(id);
-    localStorage.setItem("rejectedApplicationIds", JSON.stringify(rejectedIds));
-  }
-};
-
+  const addRejectedId = (id) => {
+    const rejectedIds = getRejectedIds();
+    if (!rejectedIds.includes(id)) {
+      rejectedIds.push(id);
+      localStorage.setItem(
+        "rejectedApplicationIds",
+        JSON.stringify(rejectedIds)
+      );
+    }
+  };
 
   useEffect(() => {
     if (!token) {
@@ -41,16 +51,22 @@ const addRejectedId = (id) => {
       setErrorMessage("");
 
       try {
-        const res = await fetch("http://localhost:5000/api/applications/employer", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch(
+          "http://localhost:5000/api/applications/employer",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!res.ok) {
           const errorData = await res.json();
-          setErrorMessage(errorData.message || "Failed to load applications. Please try again.");
+          setErrorMessage(
+            errorData.message ||
+              "Failed to load applications. Please try again."
+          );
           setApplications([]);
           return;
         }
@@ -58,15 +74,16 @@ const addRejectedId = (id) => {
         const data = await res.json();
 
         const rejectedIds = getRejectedIds();
-      const filteredApps = Array.isArray(data.data)
-        ? data.data.filter(app => !rejectedIds.includes(app._id))
-        : [];
-        console.log('Filtered applications:', filteredApps);
+        const filteredApps = Array.isArray(data.data)
+          ? data.data.filter((app) => !rejectedIds.includes(app._id))
+          : [];
+        console.log("Filtered applications:", filteredApps);
 
         setApplications(filteredApps);
-      
       } catch (err) {
-        setErrorMessage("An unexpected error occurred. Please check your network connection.");
+        setErrorMessage(
+          "An unexpected error occurred. Please check your network connection."
+        );
         setApplications([]);
       } finally {
         setLoading(false);
@@ -86,39 +103,42 @@ const addRejectedId = (id) => {
     setErrorMessage("");
 
     try {
-    const res = await fetch(`http://localhost:5000/api/applications/status/${appId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ status }),
-    });
+      const res = await fetch(
+        `http://localhost:5000/api/applications/status/${appId}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ status }),
+        }
+      );
 
-    if (!res.ok) {
-      const errorData = await res.json();
-      throw new Error(errorData.message || "Failed to update status");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to update status");
+      }
+
+      const updatedApp = await res.json();
+
+      if (status === "rejected") {
+        // Add to localStorage rejected list
+        addRejectedId(appId);
+        setApplications((prev) => prev.filter((app) => app._id !== appId));
+      } else {
+        setApplications((prev) =>
+          prev.map((app) =>
+            app._id === appId ? { ...app, status: updatedApp.status } : app
+          )
+        );
+      }
+    } catch (err) {
+      setErrorMessage(`Failed to update status: ${err.message}`);
+    } finally {
+      setUpdatingId(null);
     }
-
-    const updatedApp = await res.json();
-
-    if (status === "rejected") {
-      // Add to localStorage rejected list
-      addRejectedId(appId);
-      setApplications((prev) => prev.filter((app) => app._id !== appId));
-    } else {
-      setApplications((prev) => 
-      prev.map((app) => 
-      (app._id === appId ? {...app, status:updatedApp.status } 
-       : app )));
-    }
-  } catch (err) {
-    setErrorMessage(`Failed to update status: ${err.message}`);
-  } finally {
-    setUpdatingId(null);
-  }
-};
-
+  };
 
   const getStatusColorClass = (status) => {
     switch (status) {
@@ -137,11 +157,14 @@ const addRejectedId = (id) => {
 
   if (loading) {
     return (
-      <div
-        className="d-flex justify-content-center align-items-center vh-100 bg-light"
-      >
+      <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
         <div className="text-center">
-          <Spinner animation="border" variant="primary" role="status" style={{ width: '3rem', height: '3rem' }}>
+          <Spinner
+            animation="border"
+            variant="primary"
+            role="status"
+            style={{ width: "3rem", height: "3rem" }}
+          >
             <span className="visually-hidden">Loading...</span>
           </Spinner>
           <p className="mt-3 fs-5 text-secondary">Loading applications...</p>
@@ -249,10 +272,14 @@ const addRejectedId = (id) => {
                           <Button
                             key={status}
                             variant={
-                              app.status === status ? "primary" : "outline-primary"
+                              app.status === status
+                                ? "primary"
+                                : "outline-primary"
                             }
                             size="sm"
-                            disabled={updatingId === app._id || app.status === status}
+                            disabled={
+                              updatingId === app._id || app.status === status
+                            }
                             onClick={() => updateStatus(app._id, status)}
                           >
                             {updatingId === app._id ? (
