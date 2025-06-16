@@ -38,8 +38,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     phone: req.body.phone
   };
 
-  if (req.file?.profileImage?.[0]) {
-    updates.profileImage = req.file.profileImage[0].path;
+  if (req.files?.profileImage?.[0]) {
+    updates.profileImage = req.files.profileImage[0].path;
   }
 
   if(req.files?.resumeFile?.[0]){

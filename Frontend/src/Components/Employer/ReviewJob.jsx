@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Container, ListGroup, Row, Col, Card, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,6 +11,8 @@ const ReviewJob = () => {
   const handleClick = async () => {
   try {
     const token = localStorage.getItem('token');
+    console.log('📦 Token:', token);
+
     if (!token) {
       alert('Please login again. Token not found.');
       return;
@@ -25,13 +28,15 @@ const ReviewJob = () => {
     });
 
     if (!response.ok) {
-      throw new Error('Failed to post job');
+      const errorText = await response.text();
+      throw new Error(errorText);
     }
 
     
     navigate('/success');
   } catch (error) {
-    console.error('Error posting job:', error);
+    
+    console.error('Error posting job:',error);
     alert('There was an error posting the job. Please try again.');
   }
 };

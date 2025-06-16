@@ -52,11 +52,29 @@ const AppliedJobs = () => {
   }
 
   return (
+    <div
+      className="bg-light d-flex flex-column min-vh-100 position-relative overflow-hidden py-5"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at center, #e9f0ff 10px, #f8fbff 20px)",
+        backgroundRepeat: "repeat",
+        backgroundSize: "40px 40px",
+      }}
+    >
     <Container className="py-5">
-      <h2 className="mb-4 text-center text-primary fw-bold">My Applied Jobs</h2>
+      <h2 className="mb-4 text-center text-dark fw-bold">My Applied Jobs</h2>
+      <p className="lead text-center text-secondary mb-5">
+          View job applications
+        </p>
 
       {applications.length === 0 ? (
-        <p className="text-center text-muted">You haven't applied to any jobs yet.</p>
+         <Card className="text-center shadow-sm p-5 mt-5">
+                    <Card.Body>
+                      <Card.Title className="fs-3 text-secondary mb-3">
+                        You haven't applied to any jobs yet
+                      </Card.Title>
+                    </Card.Body>
+                  </Card>
       ) : (
         <Row xs={1} md={2} lg={2} className="g-4">
           {applications.map((app) => {
@@ -96,6 +114,7 @@ const AppliedJobs = () => {
         </Row>
       )}
     </Container>
+    </div>
   );
 };
 

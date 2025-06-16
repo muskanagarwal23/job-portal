@@ -4,35 +4,45 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className=" py-4 mt-auto" style={{ borderTop: '1px solid #dee2e6', backgroundColor:'#f5f5f5' }}>
+    <footer className="py-4 mt-auto" style={{ borderTop: '1px solid #dee2e6', backgroundColor: '#f9f9f9' }}>
       <Container>
-        <Row>
+        <Row className="gy-4 text-center text-md-start">
           {/* Brand / Logo */}
-          <Col md={4} className="mb-3">
-            <h5 className="fw-bold text-dark">Career Connect</h5>
-            <p className="text-muted">Connecting talent with opportunity.</p>
+          <Col md={4}>
+            <h4 className="fw-bold text-primary mb-2">Career Connect</h4>
+            <p className="text-muted mb-0">Connecting talent with opportunity.</p>
           </Col>
 
           {/* Quick Links */}
-          <Col md={4} className="mb-3">
-            <h6 className="text-uppercase text-dark">Quick Links</h6>
+          <Col md={4}>
+            <h6 className="text-uppercase text-dark mb-3">Quick Links</h6>
             <ul className="list-unstyled">
-              <li><Link to="/" className="text-dark text-decoration-none">Home</Link></li>
-              <li><Link to="/jobs" className="text-dark text-decoration-none">Browse Jobs</Link></li>
-              <li><Link to="/employee-profile" className="text-dark text-decoration-none">My Profile</Link></li>
-              <li><Link to="/employee-saved" className="text-dark text-decoration-none">Saved Jobs</Link></li>
+              <li className="mb-2">
+                <Link to="/" className="text-decoration-none text-muted hover-link">Home</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/jobs" className="text-decoration-none text-muted hover-link">Browse Jobs</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/employee-profile" className="text-decoration-none text-muted hover-link">My Profile</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/employee-saved" className="text-decoration-none text-muted hover-link">Saved Jobs</Link>
+              </li>
             </ul>
           </Col>
 
           {/* Contact */}
           <Col md={4}>
-            <h6 className="text-uppercase text-dark">Contact</h6>
-            <p className="mb-1 text-muted">Email: support@careerconnect.com</p>
-            <p className="mb-0 text-muted">Phone: +91-9876543210</p>
+            <h6 className="text-uppercase text-dark mb-3">Contact</h6>
+            <p className="text-muted mb-1">📧 support@careerconnect.com</p>
+            <p className="text-muted mb-0">📞 +91-9876543210</p>
           </Col>
         </Row>
 
-        <Row className="pt-3 border-top">
+        <hr className="my-4" />
+
+        <Row>
           <Col className="text-center">
             <small className="text-muted">
               &copy; {new Date().getFullYear()} Career Connect. All rights reserved.
@@ -40,6 +50,16 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
+
+      {/* Custom Footer Hover Styling */}
+      <style>
+        {`
+          .hover-link:hover {
+            color: #0d6efd;
+            transition: color 0.2s ease-in-out;
+          }
+        `}
+      </style>
     </footer>
   );
 };

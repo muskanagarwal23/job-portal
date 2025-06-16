@@ -105,7 +105,7 @@ const updateApplicationStatus = asyncHandler(async (req, res) => {
 
 const getMyApplications = asyncHandler(async (req, res) => {
   const applications = await Application.find({ employee: req.user._id })
-    .populate('job', 'title company'); // optional: populate job info
+    .populate('job', 'title companyName location'); // optional: populate job info
 
   res.json(applications);
 });

@@ -16,10 +16,11 @@ const ResetPassword = () => {
       await axios.post(`http://localhost:5000/api/users/reset-password/${token}`, 
         { password });
         console.log('Reset token being sent:', token);
-
+      toast.dismiss();
       toast.success('Password reset successful');
       navigate('/employee-login');
     } catch (err) {
+      toast.dismiss();
       toast.error(err.response?.data?.message || 'Reset failed');
     }
   };

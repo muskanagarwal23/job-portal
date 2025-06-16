@@ -4,7 +4,7 @@ const Job = require('../models/jobmodel');
 const { protect,authorize } = require('../middleware/authMiddleware');
 const catchAsync = require('../utils/catchAsync');
 
-// POST /api/jobs - create job (employer only)
+
 router.post(
   '/',
   protect,

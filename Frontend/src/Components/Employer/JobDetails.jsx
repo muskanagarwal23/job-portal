@@ -22,7 +22,8 @@ const JobDetails = () => {
     event.preventDefault();
     
     if (!title || !description || !salary || !jobType || !location || !skills || !education) {
-      toast.error("Please fill in all required fields!", {
+      toast.dismiss();
+      ("Please fill in all required fields!", {
         position: "top-right",
         autoClose: 3000,
       });

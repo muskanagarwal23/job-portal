@@ -11,9 +11,9 @@ const EmployeeSaved = () => {
 
   // Filter saved jobs based on search query (case-insensitive)
   const filteredJobs = bookmarkedJobs.filter((job) =>
-    job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    job.location.toLowerCase().includes(searchQuery.toLowerCase())
+    job?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    job?.company?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    job?.location?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleApply = async (job) => {
@@ -40,6 +40,7 @@ const EmployeeSaved = () => {
           ? 'Already applied to this job'
         : err.message;
         console.error('Apply error:', message);
+        toast.dismiss();
         toast.error('Already applied to this job ' + message);
       }
     };
@@ -55,7 +56,9 @@ const EmployeeSaved = () => {
     >
       <Container className="py-4">
         {bookmarkedJobs.length > 0 && (
-          <h3 className="mb-4 fw-bold text-primary">Saved Jobs</h3>
+          <h2 className="mb-4 fw-bold text-dark text-center">Saved Jobs</h2>
+          
+          
         )}
 
         {filteredJobs.length === 0 ? (
@@ -71,9 +74,9 @@ const EmployeeSaved = () => {
               className="mb-4 shadow-sm p-4 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center bg-light"
             >
               <div>
-                <h5 className="mb-2">{job.title}</h5>
-                <p className="mb-1">{job.companyName}</p>
-                <p className="text-muted">{job.location}</p>
+                <h5 className="mb-2">{job?.title}</h5>
+                <p className="mb-1">{job?.companyName}</p>
+                <p className="text-muted">{job?.location}</p>
               </div>
 
               <div className="d-flex flex-column align-items-end mt-3 mt-md-0 gap-2">

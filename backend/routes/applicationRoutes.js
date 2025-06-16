@@ -3,6 +3,8 @@ const router = express.Router();
 const { applyToJob,getApplicationsForEmployer,updateApplicationStatus } = require('../controllers/applicationController');
 const { protect,authorize } = require('../middleware/authMiddleware');
 const { getMyApplications } = require('../controllers/applicationController');
+const ExpressError = require('../utils/ExpressError')
+
 router.post('/apply/:jobId', protect, applyToJob);
 router.get(
   '/employer',

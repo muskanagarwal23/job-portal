@@ -19,6 +19,7 @@ const Requirements = () => {
     event.preventDefault();
 
      if (!language || !experience) {
+          toast.dismiss();
           toast.error("Please fill in all required fields!", {
             position: "top-right",
             autoClose: 3000,

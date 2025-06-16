@@ -19,6 +19,7 @@ const CompanyDetails = () => {
     event.preventDefault();
 
     if (!companyName || !company_description) {
+              toast.dismiss();
               toast.error("Please fill in all required fields!", {
                 position: "top-right",
                 autoClose: 3000,

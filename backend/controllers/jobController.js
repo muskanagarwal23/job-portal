@@ -11,7 +11,7 @@ const createJob = asyncHandler(async (req, res) => {
 
   // Attach employer to job data
   const newJob = await Job.create({ ...jobData, employer: employerId });
-
+    
   res.status(201).json(newJob);
 });
 
@@ -30,7 +30,7 @@ const deleteJob = asyncHandler(async (req, res) => {
   const employerId = req.user._id;
 
   const job = await Job.findById(jobId);
-
+    
   if (!job) {
     return res.status(404).json({ message: "Job not found" });
   }

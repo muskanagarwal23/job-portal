@@ -53,6 +53,7 @@ const JobDetail = () => {
         ? 'Already applied to this job'
       : err.message;
       console.error('Apply error:', message);
+      toast.dismiss();
       toast.error('Already applied to this job ' + message);
     }
   };

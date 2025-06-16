@@ -18,6 +18,11 @@ const jobSchema = new mongoose.Schema({
   company_description: String,
   Url: String,
   employer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  postedBy: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'User',
+  required: true
+}
 }, { timestamps: true });
 
 module.exports = mongoose.model('Job', jobSchema);

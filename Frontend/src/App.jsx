@@ -28,6 +28,8 @@ import SuccessPost from './Components/Employer/SuccessPost';
 import JobDetail from './Components/Employee/EmployeeJobDetail';
 import Received from './Components/Employer/Received';
 import MyPosts from './Components/Employer/MyPosts';
+import { Dashboard } from '@mui/icons-material';
+import EmployerDashboard from './Components/Employer/EmployerDashboard';
 
 const App = () => {
   return (
@@ -65,6 +67,7 @@ const App = () => {
           <Route path="/success" element={<SuccessPost />} />
           <Route path="/received" element={<Received />} />
           <Route path="/my-posts" element={<MyPosts />} />
+          <Route path="/dashboard" element={<EmployerDashboard />} />
           
 
         </Route>

@@ -17,13 +17,12 @@ const { getProfile,
 // });
 
 
-// Existing routes remain exactly the same
+
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/forgot-password', forgotPassword);
 router.post('/reset-password/:token', resetPassword);
 
-// Add these new routes for profile management
 router.route('/profile')
   .get(protect, authorize('employee'), getProfile)
   .put(protect, authorize('employee'), uploadProfileImage, updateProfile);

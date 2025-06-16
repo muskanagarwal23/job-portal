@@ -7,6 +7,8 @@ const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
 const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes')
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -28,6 +30,9 @@ app.use('/api/applications', applicationRoutes);
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
+console.log("🛠 Mounting /api/employer route");
+
+app.use('/api/employer', dashboardRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

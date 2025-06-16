@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Container, Row, Col, Card, Form, Button, InputGroup } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import api from '../../api'
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const EmployerLogin = () => {
   const navigate = useNavigate();
@@ -12,18 +14,25 @@ const EmployerLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword,setShowPassword] = useState(false);
-
-  const validate = () => {
+  
+  useEffect(() => {
+      AOS.init({ duration: 800 });
+    }, []);
+  
+    const validate = () => {
     if (!email) {
+      toast.dismiss();
       toast.error('Email is required');
       return false;
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
+      toast.dismiss();
       toast.error('Please enter a valid email');
       return false;
     }
     if (!password) {
+      toast.dismiss();
       toast.error('Password is required');
       return false;
     }
@@ -39,15 +48,17 @@ const EmployerLogin = () => {
       const { user, token } = res.data;
 
       if (user.role !== 'employer') {
+        toast.dismiss();
         return toast.error('Access denied. Not an employer.');
       }
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-
+      toast.dismiss();
       toast.success('Login successful');
-      navigate('/job-data');
+      navigate('/dashboard');
     } catch (err) {
+      toast.dismiss();
       toast.error(err.response?.data?.message || 'Login failed. Please try again.');
     }
   }; 
@@ -60,9 +71,13 @@ const EmployerLogin = () => {
     <Container className="d-flex align-items-center justify-content-center vh-100 bg-light">
       <Row className="w-100">
         <Col md={6} className="mx-auto">
-          <Card className="shadow">
+          <Card 
+          className="shadow-lg border-0 rounded-4"
+          data-aos='fade-up'
+          style={{ background: '#ffffff', backdropFilter: 'blur(5px)' }}
+          >
             <Card.Body className="p-4">
-              <h2 className="text-center mb-4 text-primary">Employer Login</h2>
+              <h2 className="text-center mb-4 text-primary fw-bold">Employer Login</h2>
 
               <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-4" controlId="formBasicEmail">

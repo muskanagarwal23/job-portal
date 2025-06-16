@@ -55,6 +55,7 @@ const EmployeeHome = () => {
       ? 'Already applied to this job'
     : err.message;
     console.error('Apply error:', message);
+    toast.dismiss();
     toast.error('Could not apply to job: ' + message);
   }
 };
@@ -86,7 +87,7 @@ const EmployeeHome = () => {
       }}
     >
       <Container>
-        <h2 className="text-center mb-5 fw-bold text-primary">
+        <h2 className="text-center mb-5 fw-bold text-dark">
           Available Job Listings
         </h2>
 

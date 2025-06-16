@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Container, Row, Col, Form, Card, Button,InputGroup } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const EmployeeRegister = () => {
   const navigate = useNavigate();
@@ -13,6 +15,10 @@ const EmployeeRegister = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [showPassword,setShowPassword] = useState(false)
+  
+  useEffect(() => {
+      AOS.init({ duration: 800 });
+    }, []);
 
   const validate = () => {
     if (!email) {
@@ -68,6 +74,7 @@ const EmployeeRegister = () => {
       toast.success('Registration successful');
       navigate('/employee-home');
     } catch (err) {
+      toast.dismiss();
       toast.error(err.response?.data?.message || 'Registration failed. Please try again.');
     }
   };
@@ -81,7 +88,11 @@ const EmployeeRegister = () => {
       <Container>
         <Row className="justify-content-center">
           <Col md={6}>
-            <Card className="shadow border-0 rounded-4">
+            <Card 
+            className="shadow-lg border-0 rounded-4"
+              data-aos="fade-up"
+              style={{ background: '#ffffff', backdropFilter: 'blur(5px)' }}
+              >
               <Card.Body className="p-4">
                 <h2 className="text-center mb-4 fw-bold text-primary">Employee Register</h2>
                 {error && <div className="alert alert-danger">{error}</div>}
@@ -140,14 +151,14 @@ const EmployeeRegister = () => {
 
                   <div className="text-center mt-2">
                     Already a user?{' '}
-                    <Link to="/employee-login" className="text-decoration-none fw-semibold">
+                    <Link to="/employee-login" className="text-decoration-none ">
                       Employee Login
                     </Link>
                   </div>
 
                   <div className="text-center mt-2">
                     Not an employee?{' '}
-                    <Link to="/login" className="text-decoration-none fw-semibold">
+                    <Link to="/login" className="text-decoration-none ">
                       Employer Login
                     </Link>
                   </div>
